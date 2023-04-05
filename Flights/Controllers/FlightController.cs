@@ -75,9 +75,9 @@ namespace Flights.Controllers
         [HttpGet]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        [ProducesResponseType(typeof(FlightRm), 200)]
+        [ProducesResponseType(typeof(IEnumerable<FlightRm>), 200)]
         public IEnumerable<FlightRm> Search()
-            => flights;
+        => flights;
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(400)]

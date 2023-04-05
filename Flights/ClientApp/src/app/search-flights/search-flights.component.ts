@@ -9,16 +9,10 @@ import { FlightRm } from '../api/models';
   styleUrls: ['./search-flights.component.css']
 })
 export class SearchFlightsComponent implements OnInit {
-
   searchResult: FlightRm[] = []
-
   constructor(private flightService: FlightService) { }
-
-
   ngOnInit(): void {
-    this.search()
   }
-
   search() {
     this.flightService.searchFlight({})
       .subscribe(response => this.searchResult = response,
@@ -30,5 +24,4 @@ export class SearchFlightsComponent implements OnInit {
     console.log("Response Error. Status Text: ", err.statusText)
     console.log(err)
   }
-
 }
