@@ -2,6 +2,7 @@
 using Flights.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Flights.Dtos;
+using Flights.Domain.Errors;
 
 namespace Flights.Controllers
 {
@@ -23,7 +24,7 @@ namespace Flights.Controllers
                 random.Next(90, 5000).ToString(),
                 new TimePlace("Los Angeles",DateTime.Now.AddHours(random.Next(1, 3))),
                 new TimePlace("Istanbul",DateTime.Now.AddHours(random.Next(4, 10))),
-                    random.Next(1, 853)),
+                    2),
         new (   Guid.NewGuid(),
                 "Emirates",
                 random.Next(90, 5000).ToString(),
@@ -133,12 +134,10 @@ namespace Flights.Controllers
             if (flight == null)
                 return NotFound();
 
-            flight.Bookings.Add(
-                new Booking(
-                    dto.FlightId,
-                    dto.PassengerEmail,
-                    dto.NumberOfSeats)
-                );
+            var error = flight.MakeBooking(dto.PassengerEmail, dto.NumberOfSeats);
+
+            if (error is OverbookError)
+                return Conflict(new { message = "Not enough seats." });
 
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
