@@ -1,3 +1,4 @@
+using Flights.Data;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddSwaggerGen( c =>
 
 }
 );
+
+builder.Services.AddSingleton<Entities>();
 
 var app = builder.Build();
 
