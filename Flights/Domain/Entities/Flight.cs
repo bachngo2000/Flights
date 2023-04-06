@@ -7,5 +7,9 @@
         TimePlace Departure,
         TimePlace Arrival,
         int RemainingNumberOfSeats
-        );
+        )
+    {
+        public IList<Booking> Bookings = new List<Booking>();
+
+    }
 }
