@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from './../api/services/flight.service';
 import { BookDto, FlightRm } from '../api/models';
 import { AuthService } from '../auth/auth.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class BookFlightComponent implements OnInit {
   flight: FlightRm = {}
 
   form = this.fb.group({
-    number: [1]
+    number: [1, Validators.required]
   })
 
 
@@ -60,6 +60,10 @@ export class BookFlightComponent implements OnInit {
 
 
   book() {
+
+    if (this.form.invalid)
+      return;
+
     console.log(`Booking ${this.form.get('number')?.value} passengers for the flight: ${this.flight.id}`)
 
     const booking: BookDto = {
