@@ -24,7 +24,7 @@ export class BookFlightComponent implements OnInit {
   flight: FlightRm = {}
 
   form = this.fb.group({
-    number: [1, Validators.required]
+    number: [1, Validators.compose([Validators.required, Validators.min(1), Validators.max(254)])]
   })
 
 
@@ -77,5 +77,8 @@ export class BookFlightComponent implements OnInit {
         this.handleError)
   }
 
+  get number() {
+    return this.form.controls.number
+  }
 
 }
