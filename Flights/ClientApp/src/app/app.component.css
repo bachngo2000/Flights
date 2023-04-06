@@ -3,9 +3,13 @@
   height: 337px;
   background-size: cover;
 }
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
 
 .footer {
   height: 200px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
   .footer a {
