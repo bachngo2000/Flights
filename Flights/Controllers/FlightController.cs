@@ -23,7 +23,7 @@ namespace Flights.Controllers
                 random.Next(90, 5000).ToString(),
                 new TimePlace("Los Angeles",DateTime.Now.AddHours(random.Next(1, 3))),
                 new TimePlace("Istanbul",DateTime.Now.AddHours(random.Next(4, 10))),
-                    random.Next(1, 853)),
+                    2),
         new (   Guid.NewGuid(),
                 "Emirates",
                 random.Next(90, 5000).ToString(),
@@ -133,12 +133,19 @@ namespace Flights.Controllers
             if (flight == null)
                 return NotFound();
 
+            if(flight.RemainingNumberOfSeats < dto.NumberOfSeats)
+            {
+                return Conflict(new { message = "The number of requested seats exceeds the number of remaining seats" });
+            }
+
             flight.Bookings.Add(
                 new Booking(
                     dto.FlightId,
                     dto.PassengerEmail,
                     dto.NumberOfSeats)
                 );
+
+            flight.RemainingNumberOfSeats -= dto.NumberOfSeats;
 
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }

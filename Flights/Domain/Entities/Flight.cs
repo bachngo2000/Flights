@@ -11,5 +11,8 @@
     {
         public IList<Booking> Bookings = new List<Booking>();
 
+        public int RemainingNumberOfSeats { get; set; } = RemainingNumberOfSeats;
+
+
     }
 }
