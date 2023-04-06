@@ -15,7 +15,8 @@ export class RegisterPassengerComponent implements OnInit {
 
   constructor(private passengerService: PassengerService,
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   form = this.fb.group({
     email: [''],
@@ -33,7 +34,10 @@ export class RegisterPassengerComponent implements OnInit {
     this.passengerService
       .findPassenger(params as { email: string })
       .subscribe(
-        this.login
+        this.login, e => {
+          if (e.status != 404)
+            console.error(e)
+        }
       )
   }
 
@@ -45,6 +49,7 @@ export class RegisterPassengerComponent implements OnInit {
   }
   private login = () => {
     this.authService.loginUser({ email: this.form.get('email')?.value })
+    this.router.navigate(['/search-flights'])
   }
 
 
