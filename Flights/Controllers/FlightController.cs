@@ -88,7 +88,7 @@ namespace Flights.Controllers
                 new TimePlaceRm(flight.Departure.Place.ToString(), flight.Departure.Time),
                 new TimePlaceRm(flight.Arrival.Place.ToString(), flight.Arrival.Time),
                 flight.RemainingNumberOfSeats
-                ));
+                ));//.toArray();
 
             return flightRmList;
         }
