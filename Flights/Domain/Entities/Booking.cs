@@ -2,6 +2,6 @@
 {
     public record Booking(
         string PassengerEmail,
-        byte? NumberOfSeats);
+        byte NumberOfSeats);
 
 }
