@@ -31,5 +31,4 @@ export class MyBookingsComponent implements OnInit {
     console.log("Response Error, Status Text:", err.statusText);
     console.log(err);
   }
-
 }
