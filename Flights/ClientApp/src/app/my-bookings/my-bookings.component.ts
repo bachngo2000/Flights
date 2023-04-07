@@ -31,4 +31,19 @@ export class MyBookingsComponent implements OnInit {
     console.log("Response Error, Status Text:", err.statusText);
     console.log(err);
   }
+
+  cancel(booking: BookingRm) {
+  
+      const dto: BookDto = {
+        flightId: booking.flightId,
+        numberOfSeats: booking.numberOfBookedSeats,
+        passengerEmail: booking.passengerEmail
+      };
+
+      this.bookingService.cancelBooking({ body: dto })
+        .subscribe(_ =>
+          this.bookings = this.bookings.filter(b => b != booking)
+          , this.handleError);
+  }
+
 }
