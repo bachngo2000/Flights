@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add db context
 builder.Services.AddDbContext<Entities>(options =>
-options.UseInMemoryDatabase(databaseName: "Flights"),
-ServiceLifetime.Singleton);
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("Flights")));
 
 // Add services to the container.
 
@@ -26,14 +26,19 @@ builder.Services.AddSwaggerGen( c =>
 }
 );
 
-builder.Services.AddSingleton<Entities>();
+builder.Services.AddScoped<Entities>();
 
 var app = builder.Build();
 
 var entities = app.Services.CreateScope().ServiceProvider.GetService<Entities>();
+
+entities.Database.EnsureCreated();
+
 var random = new Random();
 
-Flight[] flightsToSeed = new Flight[]
+if (!entities.Flights.Any())
+{
+    Flight[] flightsToSeed = new Flight[]
 {
     new (   Guid.NewGuid(),
                 "American Airlines",
@@ -85,9 +90,11 @@ Flight[] flightsToSeed = new Flight[]
                     random.Next(1, 853))
 };
 
-entities.Flights.AddRange(flightsToSeed);
+    entities.Flights.AddRange(flightsToSeed);
 
-entities.SaveChanges();
+    entities.SaveChanges();
+
+}
 
 
 app.UseCors(builder => builder
