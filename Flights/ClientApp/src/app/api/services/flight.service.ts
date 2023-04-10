@@ -35,6 +35,11 @@ export class FlightService extends BaseService {
    * This method doesn't expect any request body.
    */
   searchFlight$Plain$Response(params?: {
+    FromDate?: string;
+    ToDate?: string;
+    From?: string;
+    Destination?: string;
+    NumberOfPassengers?: number;
   },
   context?: HttpContext
 
@@ -42,6 +47,11 @@ export class FlightService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.SearchFlightPath, 'get');
     if (params) {
+      rb.query('FromDate', params.FromDate, {});
+      rb.query('ToDate', params.ToDate, {});
+      rb.query('From', params.From, {});
+      rb.query('Destination', params.Destination, {});
+      rb.query('NumberOfPassengers', params.NumberOfPassengers, {});
     }
 
     return this.http.request(rb.build({
@@ -63,6 +73,11 @@ export class FlightService extends BaseService {
    * This method doesn't expect any request body.
    */
   searchFlight$Plain(params?: {
+    FromDate?: string;
+    ToDate?: string;
+    From?: string;
+    Destination?: string;
+    NumberOfPassengers?: number;
   },
   context?: HttpContext
 
@@ -80,6 +95,11 @@ export class FlightService extends BaseService {
    * This method doesn't expect any request body.
    */
   searchFlight$Response(params?: {
+    fromDate?: string;
+    toDate?: string;
+    from?: string;
+    destination?: string;
+    numberOfPassengers?: number;
   },
   context?: HttpContext
 
@@ -87,6 +107,11 @@ export class FlightService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.SearchFlightPath, 'get');
     if (params) {
+      rb.query('FromDate', params.fromDate, {});
+      rb.query('ToDate', params.toDate, {});
+      rb.query('From', params.from, {});
+      rb.query('Destination', params.destination, {});
+      rb.query('NumberOfPassengers', params.numberOfPassengers, {});
     }
 
     return this.http.request(rb.build({
@@ -108,6 +133,11 @@ export class FlightService extends BaseService {
    * This method doesn't expect any request body.
    */
   searchFlight(params?: {
+    fromDate?: string;
+    toDate?: string;
+    from?: string;
+    destination?: string;
+    numberOfPassengers?: number;
   },
   context?: HttpContext
 

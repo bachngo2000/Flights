@@ -24,10 +24,11 @@ export class SearchFlightsComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.search();
   }
-
-  search() {
-    this.flightService.searchFlight({})
+  search()
+  {
+    this.flightService.searchFlight(this.searchForm.value as object)
       .subscribe(response => this.searchResult = response,
         this.handleError)
   }
