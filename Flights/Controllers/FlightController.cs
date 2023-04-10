@@ -37,6 +37,21 @@ namespace Flights.Controllers
             if (!string.IsNullOrWhiteSpace(@params.Destination))
                 flights = flights.Where(f => f.Arrival.Place.Contains(@params.Destination));
 
+
+            if (!string.IsNullOrWhiteSpace(@params.From))
+                flights = flights.Where(f => f.Departure.Place.Contains(@params.From));
+
+            if (@params.FromDate != null)
+                flights = flights.Where(f => f.Departure.Time >= @params.FromDate.Value.Date);
+
+            if (@params.ToDate != null)
+                flights = flights.Where(f => f.Departure.Time >= @params.ToDate.Value.Date.AddDays(1).AddTicks(-1));
+
+            if (@params.NumberOfPassengers != 0 && @params.NumberOfPassengers != null)
+                flights = flights.Where(f => f.RemainingNumberOfSeats >= @params.NumberOfPassengers);
+            else
+                flights = flights.Where(f => f.RemainingNumberOfSeats >= 1);
+
             var flightRmList = flights
                 .Select(flight => new FlightRm(
                 flight.Id,

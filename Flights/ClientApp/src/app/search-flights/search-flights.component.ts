@@ -24,6 +24,7 @@ export class SearchFlightsComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.search();
   }
   search()
   {
