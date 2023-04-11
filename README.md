@@ -7,7 +7,7 @@ The application utilizes Angular to build the frontend, ASP.NET to build the bac
 <img src='flights.PNG' title='Webpage Overview' width='' alt='Webpage Overview' />
 
 
-## Video Walkthrough
+## Video Walkthroughs
 
 Here's a walkthrough of implemented user stories:
 
