@@ -14,5 +14,5 @@ The application utilizes Angular to build the frontend, ASP.NET to build the bac
 
 Here's a walkthrough of implemented user stories:
 
-<img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Flights/walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
